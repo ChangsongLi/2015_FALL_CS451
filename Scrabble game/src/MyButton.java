@@ -1,11 +1,16 @@
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.Vector;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JColorChooser;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
@@ -31,18 +36,51 @@ public class MyButton extends JButton implements ActionListener{
 	public void setBG(BeginerGame bg){
 		beginerGame = bg;
 	}
+	@SuppressWarnings({ "static-access", "unchecked", "resource" })
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if(getText().equals("Beginners")){
 			new BeginerGame();
 		}else if(getText().equals("Graduate")){
-			new ProGame(ProGame.GRADUATE);
+			new ProGame(ProGame.GRADUATE,"2");
 		}else if(getText().equals("Challenger")){
-			new ProGame(ProGame.CHANLENGER);
+			String[] choices = { "2", "3", "4"};
+		    String input = (String) JOptionPane.showInputDialog(null, "Choose now...",
+		        "The number of player", JOptionPane.QUESTION_MESSAGE, null, choices, choices[0]); 
+			new ProGame(ProGame.CHANLENGER,input);
 		}
 		else if(getText().equals("Color DIY")){
-		
+			 JFrame f = new JFrame("ColorChooser");
+			    f.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+			    Container content = f.getContentPane();
+			    content.setLayout(new BoxLayout(content, BoxLayout.Y_AXIS));
+			    final JButton button = new JButton("Pick to Background color");
+			    final JButton button2 = new JButton("Pick to tile color");
+			    content.add(button);
+			    content.add(button2);
+			    ActionListener actionListener = new ActionListener() {
+			      public void actionPerformed(ActionEvent actionEvent) {
+			        Color initialBackground = button.getBackground();
+			        Color background = JColorChooser.showDialog(null,
+			            "JColorChooser Sample", initialBackground);
+			        if (background != null) {
+			          button.setBackground(background);
+			          if( actionEvent.getSource() == button){
+			        	  Menu.backgroundColor = background;
+			          }else{
+			        	  Menu. tileColor  = background;
+			          }
+			        }
+			        
+			        
+			      }
+			    };
+			    button2.addActionListener(actionListener);
+			    button.addActionListener(actionListener);
+			    f.setLocation(400, 300);
+			    f.setSize(200, 100);
+			    f.setVisible(true);
 		}
 		else if(getText().equals("Pass turn")){
 			if(beginerGame.submit.isVisible()){
@@ -129,34 +167,36 @@ public class MyButton extends JButton implements ActionListener{
 									
 									if(pos.length > 4){
 										JOptionPane.showMessageDialog(beginerGame.board, "Word too long for begineer.");
+									}else{
+										int ret = beginerGame.checkWord(pos);
+										if(ret == -1){
+											JOptionPane.showMessageDialog(beginerGame.board, "Not a word");
+										}else{
+											if(beginerGame.turnNum == 1){
+												beginerGame.scorePlayer1 = beginerGame.scorePlayer1 + ret;
+											}else{
+												beginerGame.scorePlayer2 = beginerGame.scorePlayer2 + ret;
+											}
+											beginerGame.score.setText("Player1: "+beginerGame.scorePlayer1+"     Player2: "+beginerGame.scorePlayer2);
+											if(beginerGame.turnNum == 1){
+												beginerGame.updataTilesForPlayer(1);
+												beginerGame.turnNum = 2;
+												
+											}
+											else{
+												beginerGame.updataTilesForPlayer(2);
+												beginerGame.turnNum = 1;
+											}
+											
+											beginerGame.board.repaint();
+											beginerGame.board.setVisible(true);
+											
+											this.setVisible(false);
+											beginerGame.firstTurn = false;
+										}
 									}
 									
-									int ret = beginerGame.checkWord(pos);
-									if(ret == -1){
-										JOptionPane.showMessageDialog(beginerGame.board, "Not a word");
-									}else{
-										if(beginerGame.turnNum == 1){
-											beginerGame.scorePlayer1 = beginerGame.scorePlayer1 + ret;
-										}else{
-											beginerGame.scorePlayer2 = beginerGame.scorePlayer2 + ret;
-										}
-										beginerGame.score.setText("Player1: "+beginerGame.scorePlayer1+"     Player2: "+beginerGame.scorePlayer2);
-										if(beginerGame.turnNum == 1){
-											beginerGame.updataTilesForPlayer(1);
-											beginerGame.turnNum = 2;
-											
-										}
-										else{
-											beginerGame.updataTilesForPlayer(2);
-											beginerGame.turnNum = 1;
-										}
 										
-										beginerGame.board.repaint();
-										beginerGame.board.setVisible(true);
-										
-										this.setVisible(false);
-										beginerGame.firstTurn = false;
-									}	
 									
 								}
 								//not connect
@@ -188,35 +228,37 @@ public class MyButton extends JButton implements ActionListener{
 									}
 									if(pos.length > 4){
 										JOptionPane.showMessageDialog(beginerGame.board, "Word too long for begineer.");
-									}
-									
-									int ret = beginerGame.checkWord(pos);
-									if(ret == -1){
-										JOptionPane.showMessageDialog(beginerGame.board, "Not a word");
 									}else{
-										if(beginerGame.turnNum == 1){
-											beginerGame.scorePlayer1 = beginerGame.scorePlayer1 + ret;
+										int ret = beginerGame.checkWord(pos);
+										if(ret == -1){
+											JOptionPane.showMessageDialog(beginerGame.board, "Not a word");
 										}else{
-											beginerGame.scorePlayer2 = beginerGame.scorePlayer2 + ret;
-										}
-										beginerGame.score.setText("Player1: "+beginerGame.scorePlayer1+"     Player2: "+beginerGame.scorePlayer2);
-										if(beginerGame.turnNum == 1){
-											beginerGame.updataTilesForPlayer(1);
-											beginerGame.turnNum = 2;
+											if(beginerGame.turnNum == 1){
+												beginerGame.scorePlayer1 = beginerGame.scorePlayer1 + ret;
+											}else{
+												beginerGame.scorePlayer2 = beginerGame.scorePlayer2 + ret;
+											}
+											beginerGame.score.setText("Player1: "+beginerGame.scorePlayer1+"     Player2: "+beginerGame.scorePlayer2);
+											if(beginerGame.turnNum == 1){
+												beginerGame.updataTilesForPlayer(1);
+												beginerGame.turnNum = 2;
+												
+											}
+											else{
+												beginerGame.updataTilesForPlayer(2);
+												beginerGame.turnNum = 1;
+											}
+											
+											beginerGame.board.repaint();
+											beginerGame.board.setVisible(true);
+											
+											this.setVisible(false);
+											beginerGame.firstTurn = false;
 											
 										}
-										else{
-											beginerGame.updataTilesForPlayer(2);
-											beginerGame.turnNum = 1;
-										}
-										
-										beginerGame.board.repaint();
-										beginerGame.board.setVisible(true);
-										
-										this.setVisible(false);
-										beginerGame.firstTurn = false;
-										
 									}
+									
+									
 									
 								}
 								//not connect

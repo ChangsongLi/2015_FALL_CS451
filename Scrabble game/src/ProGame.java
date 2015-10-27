@@ -18,25 +18,30 @@ public class ProGame implements ComponentListener{
 	public static final int GRADUATE = 0;
 	public static final int CHANLENGER = 1;
 	public static Vector<String> positionOfWord;
-	private int type;
-	public ProButton[] player1TilesButton, player2TilesButton;
-	public ProButton submit,pass,color;
+	public int type;
+	public boolean firstTurn = true;
+	public static ProButton choose = null;
+	public static ProButton[] player1TilesButton;
+	public static ProButton[] player2TilesButton;
+	public ProButton submit,pass;
 	public JLabel score,turn;
 	private ProBoardButton[][] buttonOnBoard; 
 	public JFrame board;
 	private JPanel panel;
-	public int scorePlayer1 = 0,scorePlayer2 = 0;
+	public int scorePlayer1 = 0,scorePlayer2 = 0,scorePlayer3 = 0,scorePlayer4 = 0;
 	private Vector<Tiles> tiles; 
-	public int turnNum = 1;
+	public static int turnNum = 1;
 	private Tiles[] player1Tiles, player2Tiles;
 	public Vector<String> allWords = new Vector<String>();
-	
-	public ProGame(int typeBoard){
+	String numberOfPlayer;
+	public ProGame(int typeBoard,String num){
+		numberOfPlayer = num;
 		type =  typeBoard;
 		createBoard();
 	}
 	
 	private void createBoard(){
+		turnNum = 1;
 		board = new JFrame("Pro Game");
 		board.setVisible(false);
 		board.setBounds(200, 50, 700, 700);
@@ -52,8 +57,14 @@ public class ProGame implements ComponentListener{
 		
 		initBoardButton();
 		
-		score = new JLabel("Player1: "+scorePlayer1+"     Player2: "+scorePlayer2);
-		score.setBounds(board.getWidth()/2,20, board.getWidth()/2, 60);
+		if(numberOfPlayer.equals("2")){
+			score = new JLabel("Player1: "+scorePlayer1+" Player2: "+scorePlayer2);
+		}else if(numberOfPlayer.equals("3")){
+			score = new JLabel("Player1: "+scorePlayer1+" Player2: "+scorePlayer2+" Player3: "+scorePlayer3);
+		}else if(numberOfPlayer.equals("4")){
+			score = new JLabel("Player1: "+scorePlayer1+" Player2: "+scorePlayer2+" Player3: "+scorePlayer3+" Player4: "+scorePlayer4);
+		}
+		score.setBounds(board.getWidth()/3,20, board.getWidth()/2, 60);
 		score.setFont(new Font("Serif", Font.PLAIN, 20));
 		panel.add(score);
 		
@@ -68,6 +79,9 @@ public class ProGame implements ComponentListener{
 		player1TilesButton = new ProButton[7];
 		player2TilesButton = new ProButton[7];
 		Border thickBorder = new LineBorder(Color.black, 1);
+		
+		turnNum = 1;
+	
 		for(int i = 0; i <player1Tiles.length ; i++){
 			//add p1 tiles to panel
 			player1Tiles[i] = getATile();
@@ -118,6 +132,76 @@ public class ProGame implements ComponentListener{
 		board.setVisible(true);
 	}
 
+	public String getWord(int[][] location){
+		String s = "";
+		for(int i = 0; i < location.length; i++){
+			Scanner scan = new Scanner(buttonOnBoard[location[i][0]][location[i][1]].getText());
+			s = s  + scan.next();
+		}
+		return s;
+	}
+	
+	public int checkWord(int[][] location){
+		String word = getWord(location);
+		if(allWords.contains(word)){
+			int total = 0;
+			int wordMult = 1;
+			for(int i = 0; i < word.length(); i++){
+				
+				Scanner scanner = new Scanner(buttonOnBoard[location[i][0]][location[i][1]].getText());
+				scanner.next();
+				int score = scanner.nextInt();
+				int letMult = 1;
+				if(buttonOnBoard[location[i][0]][location[i][1]].getType() == BoardButton.TRIPLELETTER){
+					wordMult = wordMult * 3;
+				}else if(buttonOnBoard[location[i][0]][location[i][1]].getType() == BoardButton.DOUBLELETTER){
+					letMult = 2;
+				}else if(buttonOnBoard[location[i][0]][location[i][1]].getType() == BoardButton.DOUBLEWORD){
+					wordMult = wordMult * 2;
+				}else if(buttonOnBoard[location[i][0]][location[i][1]].getType() == BoardButton.TRIPLEWORD){
+					letMult = 3;
+				}
+				total = total +score * letMult;
+				scanner.close();
+			}
+			total = total * wordMult;
+			return total;
+		}else{
+			return -1;
+		}
+	}
+	
+	public void updataTilesForPlayer(int player){
+		if(player == 1){
+			for(int i = 0; i < player1TilesButton.length; i++){
+				if(player1TilesButton[i].isSetted()){
+					player1TilesButton[i].setSetted(false);
+					Tiles t = getATile();
+					String name = t.getNameOfTile()+" "+t.getScoreOfTile();
+					player1TilesButton[i].setText(name);
+					System.out.println(name);
+					Border thickBorder = new LineBorder(Color.black, 1);
+					player1TilesButton[i].setBorder(thickBorder);
+					player1TilesButton[i].setBackground(Menu.tileColor);
+					player1TilesButton[i].setOpaque(true);
+					player1TilesButton[i].setBorder(thickBorder);
+					player1TilesButton[i].setBorderPainted(true);
+				}
+			}
+		}else{
+			for(int i = 0; i < player2TilesButton.length; i++){
+				if(player2TilesButton[i].isSetted()){
+					Tiles t = getATile();
+					String name = t.getNameOfTile()+" "+t.getScoreOfTile();
+					player2TilesButton[i].setText(name);
+					Border thickBorder = new LineBorder(Color.black, 1);
+					player2TilesButton[i].setBorder(thickBorder);
+					player2TilesButton[i].setBackground(Menu.tileColor);
+				}
+			}
+		}
+	}
+	
 	public void initPositionOfWord(){
 		positionOfWord = new Vector<String>();
 	}
@@ -298,8 +382,22 @@ public class ProGame implements ComponentListener{
 	
 	@Override
 	public void componentResized(ComponentEvent e) {
-		// TODO Auto-generated method stub
+		for(int row = 0; row < 15; row++){
+			for(int col = 0; col < 15; col++){
+				buttonOnBoard[row][col].setBounds(board.getWidth()/5+board.getWidth()/20 *col,100 +board.getHeight()/20 * row,board.getWidth()/20,board.getHeight()/20);
+			}
+		}
+		for(int i = 0; i <player1Tiles.length ; i++){
+			player1TilesButton[i].setBounds(board.getWidth()/20, board.getHeight()/6 + board.getHeight()/14 * i, board.getWidth()/14, board.getHeight()/14);
+			player2TilesButton[i].setBounds(board.getWidth()/20, board.getHeight()/6 + board.getHeight()/14 * i, board.getWidth()/14, board.getHeight()/14);
+		}
+		pass.setBounds(board.getWidth()/25, board.getHeight()/4 + board.getHeight()/13 * 8, board.getWidth()/10, board.getHeight()/14);
+		submit.setBounds(board.getWidth()/25, board.getHeight()/4 + board.getHeight()/14 * 7, board.getWidth()/10, board.getHeight()/14);
+		panel.setBounds(0,0,board.getWidth(),board.getHeight());
+		score.setBounds(board.getWidth()/3,20, board.getWidth()/2, 60);
+		turn.setBounds(board.getWidth()/15,10, board.getWidth()/2, 80);
 		
+		board.repaint();
 	}
 
 	@Override

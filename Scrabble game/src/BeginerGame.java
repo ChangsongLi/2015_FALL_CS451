@@ -37,6 +37,7 @@ public class BeginerGame implements ComponentListener{
 	}
 	
 	private void createBoard(){
+		turnNum = 1;
 		board = new JFrame("Beginer Game");
 		board.setVisible(false);
 		board.setBounds(200, 50, 700, 700);
