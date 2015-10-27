@@ -8,7 +8,7 @@ public class Driver {
 	}
 	
 	public Driver(){
-		new BeginerGame();
+		new Menu();
 	}
 
 }
