@@ -4,6 +4,9 @@ import java.awt.Point;
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Vector;
 import javax.swing.*;
 import javax.swing.BorderFactory;
@@ -21,6 +24,10 @@ public class TramPanel implements ActionListener {
 	JButton startButton, increaseSpeedButton, decreaseSpeedButton, increaseTimeButton, decreaseTimeButton;
 	Vector<Point> points;
 	boolean running = false;
+	
+	int theme = 1;
+	// train map
+	JLabel label;
 	JLabel tram, notification, timeLabel, door, leftDoor, rightDoor, speedLabel, stopDurationLabel;
 	int windowHeight = 660;
 	int windowWidth = 1000;
@@ -29,16 +36,18 @@ public class TramPanel implements ActionListener {
 	Timer timer = new Timer(0, this), stopTimer = new Timer(0, this), openDoor = new Timer(0, this),
 			closeDoor = new Timer(0, this),currentTime;
 	int timerRunning = 0;
-
-	
+	JLabel[] arriveTime = new JLabel[5];
 	int p = 1;
 	int speed = 60;
 	int stopTime = 12;
+	int[] allStop = {0, 429 ,836 ,1222 ,1427};
 	// all colors
 	Color mainPanelColor = new Color(153, 204, 255);
 	Color secondColor = new Color(255, 255, 204);
 	Color thirdColor = new Color(255, 204, 51);
-
+	JLabel[] station = new JLabel[5];
+	JComboBox<String> themes;
+	
 	TramPanel() {
 		setUpWindow();
 	}
@@ -56,11 +65,13 @@ public class TramPanel implements ActionListener {
 		window.add(mainPanel);
 
 		ImageIcon image = new ImageIcon("Tram route.png");
-		JLabel label = new JLabel(image);
+		label = new JLabel(image);
 		label.setBounds(101, 10, 797, 311);
 		label.setOpaque(true);
 		mainPanel.add(label);
 
+		createStationLabel();
+		
 		tram = new JLabel();
 		tram.setBounds(400, 242, 40, 40);
 		tram.setBackground(thirdColor);
@@ -145,7 +156,7 @@ public class TramPanel implements ActionListener {
 		currentTime.start();
 		
 		timeLabel = new JLabel("  "+new java.util.Date());
-		timeLabel.setBounds(365, 340, 270, 30);
+		timeLabel.setBounds(565, 500, 270, 30);
 		timeLabel.setBackground(secondColor);
 		timeLabel.setFont(new Font("Serif", Font.BOLD, 18));
 		timeLabel.setForeground(thirdColor);
@@ -154,8 +165,67 @@ public class TramPanel implements ActionListener {
 		
 		timer = new Timer((int) (5 / (60 / 60.0)), this);
 
+		for(int i = 0; i < 5; i++){
+			arriveTime[i] = new JLabel();
+			arriveTime[i].setBounds(60,470 + i * 29, 400,30);
+			arriveTime[i].setBackground(secondColor);
+			arriveTime[i].setOpaque(true);
+			arriveTime[i].setForeground(thirdColor);
+			arriveTime[i].setFont(new Font("Serif", Font.BOLD, 16));
+			arriveTime[i].setBorder(b);
+			mainPanel.add(arriveTime[i]);
+		}
 		getPoints();
+		
+		String[] theme = {"Choose a theme.","Defaut","Bright","Dark"};
+		themes = new JComboBox<String>(theme);
+		themes.setBounds(700,570,200,40);
+		themes.addActionListener(this);
+		mainPanel.add(themes);
+		
 		window.setVisible(true);
+	}
+	
+	private void createStationLabel(){
+		station[0] = new JLabel("A");
+		station[0].setBounds(415, 242, 20, 30);
+		station[0].setBackground(secondColor);
+		station[0].setFont(new Font("Serif", Font.BOLD, 18));
+		station[0].setForeground(thirdColor);
+		station[0].setOpaque(false);
+		label.add(station[0]);
+		
+		station[1] = new JLabel("B");
+		station[1].setBounds(725, 116, 20, 30);
+		station[1].setBackground(secondColor);
+		station[1].setFont(new Font("Serif", Font.BOLD, 18));
+		station[1].setForeground(thirdColor);
+		station[1].setOpaque(false);
+		label.add(station[1]);
+		
+		station[2] = new JLabel("C");
+		station[2].setBounds(390, 25, 20, 30);
+		station[2].setBackground(secondColor);
+		station[2].setFont(new Font("Serif", Font.BOLD, 18));
+		station[2].setForeground(thirdColor);
+		station[2].setOpaque(false);
+		label.add(station[2]);
+		
+		station[3] = new JLabel("D");
+		station[3].setBounds(60, 95, 20, 30);
+		station[3].setBackground(secondColor);
+		station[3].setFont(new Font("Serif", Font.BOLD, 18));
+		station[3].setForeground(thirdColor);
+		station[3].setOpaque(false);
+		label.add(station[3]);
+		
+		station[4] = new JLabel("E");
+		station[4].setBounds(130, 242, 20, 30);
+		station[4].setBackground(secondColor);
+		station[4].setFont(new Font("Serif", Font.BOLD, 18));
+		station[4].setForeground(thirdColor);
+		station[4].setOpaque(false);
+		label.add(station[4]);
 	}
 
 	private void getPoints() {
@@ -195,6 +265,45 @@ public class TramPanel implements ActionListener {
 		}
 	}
 
+	private void setArriveTime(){
+		boolean atStation = false;
+		int first = 0;
+		for(int i = 0; i < 5; i++){
+			if(p >= allStop[i]){
+				if(p == allStop[i]){
+					atStation = true;
+				}
+				first = (i + 1) % 5;
+			}
+		}
+		
+		for(int i = 0; i < 5; i++){
+			Calendar cal = Calendar.getInstance();
+			String s = " Arrving Station "+((char)('A'+first)) + " : ";
+			int mul = i;
+			if(atStation){
+				mul++;
+			}
+			int time;
+			if(allStop[first] > p){
+				time = (((allStop[first] - p) * ( (int) (5 / (speed / 60.0)) ) + (mul * 1000 * (stopTime + 2) )))/1000;
+				cal.add(Calendar.SECOND, time);
+				s += cal.getTime();
+				arriveTime[i].setText(s);
+			}else if(allStop[first] == p){
+				arriveTime[i].setText(" Arrving Station "+((char)('A'+first)) + " : Arrived");
+			}else{
+				time = (((1711 - (p - allStop[first]))* ( (int) (5 / (speed / 60.0)) ) + (mul * 1000 * (stopTime + 2) )))/1000;
+				cal.add(Calendar.SECOND, time);
+				s += cal.getTime();
+				arriveTime[i].setText(s);
+			}
+			
+			
+			first = (first + 1) % 5;
+		}
+	}
+	
 	private void openDoor() {
 		openDoor = new Timer(125, this);
 		openDoor.start();
@@ -213,8 +322,11 @@ public class TramPanel implements ActionListener {
 
 	private void move() {
 		tram.setLocation(points.get(p));
+		setArriveTime();
 		if (p == 0 || p == 429 || p == 836 || p == 1222 || p == 1427) {
-			stop();
+			if(stopTime != 0)
+				stop();
+		}else{
 		}
 		p++;
 		p = p % 1711;
@@ -224,7 +336,12 @@ public class TramPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == startButton) {
 			if (!running) {
-				startButton.setIcon(new ImageIcon("stop.png"));
+				setArriveTime();
+				if(theme == 1)
+					startButton.setIcon(new ImageIcon("stop.png"));
+				else if(theme == 2)
+					startButton.setIcon(new ImageIcon("stopBlue.png"));
+				
 				if (timerRunning == 1 || timerRunning == 0)
 					timer.start();
 				else if (timerRunning == 2)
@@ -235,7 +352,11 @@ public class TramPanel implements ActionListener {
 					openDoor.start();
 				running = true;
 			} else {
-				startButton.setIcon(new ImageIcon("start.png"));
+				if(theme == 1){
+					startButton.setIcon(new ImageIcon("start.png"));
+				}else if(theme == 2){
+					startButton.setIcon(new ImageIcon("startBlue.png"));
+				}
 				if (timer.isRunning()) {
 					timer.stop();
 					timerRunning = 1;
@@ -306,6 +427,133 @@ public class TramPanel implements ActionListener {
 			closeDoor();
 		}else if(e.getSource() == currentTime){
 			timeLabel.setText("  "+new java.util.Date());
+		}
+		else if(e.getSource() == themes){
+			if(themes.getSelectedIndex() != 0 && themes.getSelectedIndex() != theme){
+				if(themes.getSelectedIndex() == 2){
+					leftDoor.setIcon(new ImageIcon("doorBlue.png"));
+					rightDoor.setIcon(new ImageIcon("doorBlue.png"));
+					startButton.setIcon(new ImageIcon("startBlue.png"));
+					increaseSpeedButton.setIcon(new ImageIcon("rightArrowBlue.png"));
+					decreaseSpeedButton.setIcon(new ImageIcon("leftArrowBlue.png"));
+					decreaseTimeButton.setIcon(new ImageIcon("leftArrowBlue.png"));
+					increaseTimeButton.setIcon(new ImageIcon("rightArrowBlue.png"));
+					label.setIcon(new ImageIcon("Tram routeBlue.png"));
+					mainPanelColor = new Color(255, 255, 255);
+					secondColor = new Color(153, 204, 255);
+					thirdColor = new Color(102, 153, 204);
+					
+					Border b = BorderFactory.createLineBorder(thirdColor, 2);
+					for(int i = 0; i < 5; i++){
+						station[i].setBackground(secondColor);
+						station[i].setForeground(mainPanelColor);
+						arriveTime[i].setBackground(secondColor);
+						arriveTime[i].setForeground(mainPanelColor);
+						arriveTime[i].setBorder(b);
+					}
+					startButton.setBorder(b);
+					increaseSpeedButton.setBorder(b);
+					decreaseSpeedButton.setBorder(b);
+					decreaseTimeButton.setBorder(b);
+					increaseTimeButton.setBorder(b);
+					door.setBackground(mainPanelColor);
+					speedLabel.setBackground(secondColor);
+					speedLabel.setForeground(thirdColor);
+					speedLabel.setBorder(b);
+					mainPanel.setBackground(mainPanelColor);
+					tram.setBackground(thirdColor);
+					stopDurationLabel.setBackground(secondColor);
+					stopDurationLabel.setForeground(thirdColor);
+					stopDurationLabel.setBorder(b);
+					timeLabel.setBackground(secondColor);
+					timeLabel.setBorder(b);
+					timeLabel.setForeground(thirdColor);
+					theme = 2;
+				}else if(themes.getSelectedIndex() == 1){
+					leftDoor.setIcon(new ImageIcon("door.png"));
+					rightDoor.setIcon(new ImageIcon("door.png"));
+					startButton.setIcon(new ImageIcon("start.png"));
+					increaseSpeedButton.setIcon(new ImageIcon("rightArrow.png"));
+					decreaseSpeedButton.setIcon(new ImageIcon("leftArrow.png"));
+					decreaseTimeButton.setIcon(new ImageIcon("leftArrow.png"));
+					increaseTimeButton.setIcon(new ImageIcon("rightArrow.png"));
+					label.setIcon(new ImageIcon("Tram route.png"));
+					mainPanelColor = new Color(153, 204, 255);
+					secondColor = new Color(255, 255, 204);
+					thirdColor = new Color(255, 204, 51);
+					
+					Border b = BorderFactory.createLineBorder(thirdColor, 2);
+					
+					for(int i = 0; i < 5; i++){
+						station[i].setBackground(secondColor);
+						station[i].setForeground(thirdColor);
+						arriveTime[i].setBackground(secondColor);
+						arriveTime[i].setForeground(thirdColor);
+						arriveTime[i].setBorder(b);
+					}
+					increaseSpeedButton.setBorder(b);
+					decreaseSpeedButton.setBorder(b);
+					decreaseTimeButton.setBorder(b);
+					increaseTimeButton.setBorder(b);
+					startButton.setBorder(b);
+					
+					speedLabel.setBackground(secondColor);
+					speedLabel.setForeground(thirdColor);
+					speedLabel.setBorder(b);
+					door.setBackground(mainPanelColor);
+					tram.setBackground(thirdColor);
+					mainPanel.setBackground(mainPanelColor);	
+					stopDurationLabel.setBackground(secondColor);
+					stopDurationLabel.setForeground(thirdColor);
+					stopDurationLabel.setBorder(b);
+					timeLabel.setBackground(secondColor);
+					timeLabel.setBorder(b);
+					timeLabel.setForeground(thirdColor);
+					theme = 1;
+				}else if(themes.getSelectedIndex() == 3){
+					leftDoor.setIcon(new ImageIcon("doorDark.png"));
+					rightDoor.setIcon(new ImageIcon("doorDark.png"));
+					startButton.setIcon(new ImageIcon("startDark.png"));
+					increaseSpeedButton.setIcon(new ImageIcon("rightArrowDark.png"));
+					decreaseSpeedButton.setIcon(new ImageIcon("leftArrowDark.png"));
+					decreaseTimeButton.setIcon(new ImageIcon("leftArrowDark.png"));
+					increaseTimeButton.setIcon(new ImageIcon("rightArrowDark.png"));
+					label.setIcon(new ImageIcon("Tram routeDark.png"));
+					mainPanelColor = new Color(204, 153, 153);
+					secondColor = new Color(204, 204, 153);
+					thirdColor = new Color(0, 0, 0);
+					
+					Border b = BorderFactory.createLineBorder(thirdColor, 2);
+					
+					
+					for(int i = 0; i < 5; i++){
+						station[i].setBackground(secondColor);
+						station[i].setForeground(thirdColor);
+						arriveTime[i].setBackground(secondColor);
+						arriveTime[i].setForeground(thirdColor);
+						arriveTime[i].setBorder(b);
+					}
+					increaseSpeedButton.setBorder(b);
+					decreaseSpeedButton.setBorder(b);
+					decreaseTimeButton.setBorder(b);
+					increaseTimeButton.setBorder(b);
+					startButton.setBorder(b);
+					
+					speedLabel.setBackground(secondColor);
+					speedLabel.setForeground(thirdColor);
+					speedLabel.setBorder(b);
+					door.setBackground(mainPanelColor);
+					tram.setBackground(secondColor);
+					mainPanel.setBackground(mainPanelColor);	
+					stopDurationLabel.setBackground(secondColor);
+					stopDurationLabel.setForeground(thirdColor);
+					stopDurationLabel.setBorder(b);
+					timeLabel.setBackground(secondColor);
+					timeLabel.setBorder(b);
+					timeLabel.setForeground(thirdColor);
+					theme = 3;
+				}
+			}
 		}
 	}
 }
