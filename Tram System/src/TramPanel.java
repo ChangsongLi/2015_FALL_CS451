@@ -528,7 +528,7 @@ public class TramPanel implements ActionListener {
 					
 					for(int i = 0; i < 5; i++){
 						station[i].setBackground(secondColor);
-						station[i].setForeground(thirdColor);
+						station[i].setForeground(mainPanelColor);
 						arriveTime[i].setBackground(secondColor);
 						arriveTime[i].setForeground(thirdColor);
 						arriveTime[i].setBorder(b);
