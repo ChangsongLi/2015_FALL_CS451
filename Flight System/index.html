@@ -34,6 +34,23 @@ function startTime()
 	
 	timerid = setTimeout("startTime()", 1000);
 }
+    
+function startTimeTitle() {
+    var today = new Date();
+    var h = today.getHours();
+    var m = today.getMinutes();
+    var s = today.getSeconds();
+    m = checkTime(m);
+    s = checkTime(s);
+    document.getElementById('txt').innerHTML ="Local Time: "+
+    h + ":" + m + ":" + s;
+    var t = setTimeout(startTimeTitle, 500);
+}
+function checkTime(i) {
+    if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+    return i;
+}
+    
 </script>
     
     
@@ -86,7 +103,7 @@ function startTime()
 	  </script>
 </head>
 
-<body class="home blog header-full-width full-width-content" onload="startTime();">
+<body class="home blog header-full-width full-width-content" onload="startTime(); startTimeTitle();">
   <div id="header">
   <div class="site-header">
     <h1 class="site-header-logo-container">
@@ -101,7 +118,8 @@ function startTime()
 
 </ul>
 
-
+<div id="txt"  style="position:absolute; width:200px; height:40px; top:15px; left: 800px;"></div>
+      
 <div id="site-header-bigg-social">
 <ul class="horizontal-list">
 <li><a href="https://twitter.com/opendesigns" target="_blank" class="bigg-social-twitter bigg-social-icon image-replace">Twitter</a></li>
@@ -163,9 +181,9 @@ function startTime()
 			<td align="center" width="15%"><font size="5"><b>Status</b></font></td>
 		</tr>
 		<tr>
-			<td style="width: 14%">American Airlines</td>
-			<td style="width: 14%">&nbsp;AA 3345</td>
-			<td width="24%">&nbsp;Chicago</td>
+			<td style="width: 14%" align="center">American Airlines</td>
+			<td style="width: 14%" align="center">AA 3345</td>
+			<td width="24%" align="center">&nbsp;Chicago</td>
 			<td width="13%" align="right">9:30 A.M.&nbsp;&nbsp;&nbsp;&nbsp; </td>
 			<td width="13%" align="right">&nbsp;9:30 A.M.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			</td>
@@ -173,9 +191,9 @@ function startTime()
 			<td width="15%" class="auto-style6">&nbsp;Landed</td>
 		</tr>
 		<tr>
-			<td style="width: 14%">British Airways</td>
-			<td style="width: 14%">&nbsp;BA 6764</td>
-			<td width="24%">&nbsp;Chicago</td>
+			<td style="width: 14%" align="center">British Airways</td>
+			<td style="width: 14%" align="center">BA 6764</td>
+			<td width="24%" align="center">&nbsp;Chicago</td>
 			<td width="13%" align="right">9:30 A.M.&nbsp;&nbsp;&nbsp;&nbsp; </td>
 			<td width="13%" align="right">9:30 A.M.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			</td>
@@ -183,9 +201,9 @@ function startTime()
 			<td width="15%" class="auto-style5">&nbsp;Landed</td>
 		</tr>
 		<tr>
-			<td style="width: 14%">Delta</td>
-			<td style="width: 14%">&nbsp;DL 4648</td>
-			<td width="24%">&nbsp;Minneapolis</td>
+			<td style="width: 14%" align="center">Delta</td>
+			<td style="width: 14%" align="center">DL 4648</td>
+			<td width="24%" align="center">&nbsp;Minneapolis</td>
 			<td width="13%" align="right">11:50 A.M.&nbsp;&nbsp;&nbsp;&nbsp; </td>
 			<td width="13%" align="right">&nbsp;12:50&nbsp; P.M.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			</td>
@@ -193,9 +211,9 @@ function startTime()
 			<td width="15%" class="auto-style3">&nbsp;Delayed</td>
 		</tr>
 		<tr>
-			<td style="width: 14%">American Airlines</td>
-			<td style="width: 14%">&nbsp;AA 3497</td>
-			<td width="24%">&nbsp;Chicago</td>
+			<td style="width: 14%" align="center">American Airlines</td>
+			<td style="width: 14%" align="center">AA 3497</td>
+			<td width="24%" align="center">&nbsp;Chicago</td>
 			<td width="13%" align="right">1:31 P.M.&nbsp;&nbsp;&nbsp;&nbsp; </td>
 			<td width="13%" align="right">1:31 P.M.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			</td>
@@ -203,9 +221,9 @@ function startTime()
 			<td width="15%" bgcolor="#008000"><b>&nbsp;On-Time</b></td>
 		</tr>
 		<tr>
-			<td style="width: 14%">Etihad Airways</td>
-			<td style="width: 14%">&nbsp;ET 3294&nbsp;</td>
-			<td width="24%">&nbsp;Chicago&nbsp;</td>
+			<td style="width: 14%" align="center">Etihad Airways</td>
+			<td style="width: 14%" align="center">ET 3294&nbsp;</td>
+			<td width="24%" align="center">&nbsp;Chicago&nbsp;</td>
 			<td width="13%" align="right">1:31 P.M.&nbsp;&nbsp;&nbsp;&nbsp; </td>
 			<td width="13%" align="right">1:31 P.M.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			</td>
@@ -213,9 +231,9 @@ function startTime()
 			<td width="15%" bgcolor="#008000">&nbsp;<strong>On-Time</strong></td>
 		</tr>
 		<tr>
-			<td style="width: 14%">Delta</td>
-			<td style="width: 14%">&nbsp;DL 4549</td>
-			<td width="24%">&nbsp;Minneapolis</td>
+			<td style="width: 14%" align="center">Delta</td>
+			<td style="width: 14%" align="center">DL 4549</td>
+			<td width="24%" align="center">&nbsp;Minneapolis</td>
 			<td width="13%" align="right">4:55 P.M.&nbsp;&nbsp;&nbsp;&nbsp; </td>
 			<td width="13%" align="right">&nbsp;5:50 P.M.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			</td>
@@ -223,9 +241,9 @@ function startTime()
 			<td width="15%" class="auto-style3">&nbsp;Delayed</td>
 		</tr>
 		<tr>
-			<td style="width: 14%">KLM</td>
-			<td style="width: 14%">&nbsp;KL 6705&nbsp;</td>
-			<td width="24%">&nbsp;Minneapolis&nbsp;</td>
+			<td style="width: 14%" align="center">KLM</td>
+			<td style="width: 14%" align="center">KL 6705&nbsp;</td>
+			<td width="24%" align="center">&nbsp;Minneapolis&nbsp;</td>
 			<td width="13%" align="right">4:55 P.M.&nbsp;&nbsp;&nbsp;&nbsp; </td>
 			<td width="13%" align="right">&nbsp;5:50 P.M.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			</td>
@@ -233,9 +251,9 @@ function startTime()
 			<td width="15%" class="auto-style4">&nbsp; <strong>Delayed</strong></td>
 		</tr>
 		<tr>
-			<td style="width: 14%">Air France</td>
-			<td style="width: 14%">&nbsp;AF 2180</td>
-			<td width="24%">&nbsp;Minneapolis&nbsp;</td>
+			<td style="width: 14%" align="center">Air France</td>
+			<td style="width: 14%" align="center">AF 2180</td>
+			<td width="24%" align="center">&nbsp;Minneapolis&nbsp;</td>
 			<td width="13%" align="right">4:55 P.M.&nbsp;&nbsp;&nbsp;&nbsp; </td>
 			<td width="13%" align="right">&nbsp;5:50 P.M.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			</td>
@@ -243,9 +261,9 @@ function startTime()
 			<td width="15%" class="auto-style4">&nbsp;<strong>Delayed</strong></td>
 		</tr>
 		<tr>
-			<td style="width: 14%">American Airlines</td>
-			<td style="width: 14%">&nbsp;AA 3347 </td>
-			<td width="24%">&nbsp;Chicago</td>
+			<td style="width: 14%" align="center">American Airlines</td>
+			<td style="width: 14%" align="center">AA 3347 </td>
+			<td width="24%" align="center">&nbsp;Chicago</td>
 			<td width="13%" align="right">9:41 P.M.&nbsp;&nbsp;&nbsp;&nbsp; </td>
 			<td width="13%" align="right">&nbsp;9:41 P.M.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			</td>
@@ -253,9 +271,9 @@ function startTime()
 			<td width="15%" bgcolor="#008000"><b>&nbsp;On-Time</b></td>
 		</tr>
 		<tr>
-			<td style="width: 14%">Qatar Airways</td>
-			<td style="width: 14%">&nbsp;QT 5270 </td>
-			<td width="24%">&nbsp;Chicago</td>
+			<td style="width: 14%" align="center">Qatar Airways</td>
+			<td style="width: 14%" align="center">QT 5270 </td>
+			<td width="24%" align="center">&nbsp;Chicago</td>
 			<td width="13%" align="right">9:41 P.M.&nbsp;&nbsp;&nbsp;&nbsp; </td>
 			<td width="13%" align="right">&nbsp;9:41 P.M.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			</td>
@@ -263,9 +281,9 @@ function startTime()
 			<td width="15%" bgcolor="#008000"><b>&nbsp;On-Time</b></td>
 		</tr>
 		<tr>
-			<td style="width: 14%">British Airways</td>
-			<td style="width: 14%">&nbsp;BA 6842 </td>
-			<td width="24%">&nbsp;Chicago</td>
+			<td style="width: 14%" align="center">British Airways</td>
+			<td style="width: 14%" align="center">BA 6842 </td>
+			<td width="24%" align="center">&nbsp;Chicago</td>
 			<td width="13%" align="right">9:41 P.M.&nbsp;&nbsp;&nbsp;&nbsp; </td>
 			<td width="13%" align="right">&nbsp;9:41 P.M.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			</td>
@@ -273,9 +291,9 @@ function startTime()
 			<td width="15%" bgcolor="#008000"><b>&nbsp;On-Time</b></td>
 		</tr>
 		<tr>
-			<td style="width: 14%">Iberia</td>
-			<td style="width: 14%">&nbsp;IB 4087</td>
-			<td width="24%">&nbsp;Chicago</td>
+			<td style="width: 14%" align="center">Iberia</td>
+			<td style="width: 14%" align="center">IB 4087</td>
+			<td width="24%" align="center">&nbsp;Chicago</td>
 			<td width="13%" align="right">9:41 P.M.&nbsp;&nbsp;&nbsp;&nbsp; </td>
 			<td width="13%" align="right">&nbsp;9:41 P.M.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			</td>
@@ -309,9 +327,9 @@ function startTime()
 			<td align="center" width="15%"><font size="5"><b>Status</b></font></td>
 		</tr>
 		<tr>
-			<td style="width: 14%">American Airlines</td>
-			<td style="width: 14%">&nbsp;AA 3366</td>
-			<td width="24%">&nbsp;Chicago</td>
+			<td style="width: 14%" align="center">American Airlines</td>
+			<td style="width: 14%" align="center">AA 3366</td>
+			<td width="24%" align="center">&nbsp;Chicago</td>
 			<td width="13%" align="right">&nbsp;6:20 A.M.&nbsp; &nbsp;</td>
 			<td width="13%" align="right">&nbsp;6:24 A.M.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			</td>
@@ -319,9 +337,9 @@ function startTime()
 			<td width="15%" class="auto-style6">&nbsp;Departed</td>
 		</tr>
 		<tr>
-			<td style="width: 14%">Etihad Airways</td>
-			<td style="width: 14%">&nbsp;ET 3376</td>
-			<td width="24%">&nbsp;Chicago</td>
+			<td style="width: 14%" align="center">Etihad Airways</td>
+			<td style="width: 14%" align="center">ET 3376</td>
+			<td width="24%" align="center">&nbsp;Chicago</td>
 			<td width="13%" align="right">6:20 A.M.&nbsp;&nbsp;&nbsp;&nbsp;
 			</td>
 			<td width="13%" align="right">6:24 A.M.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -330,9 +348,9 @@ function startTime()
 			<td width="15%" class="auto-style5">&nbsp;Departed</td>
 		</tr>
 		<tr>
-			<td style="width: 14%">6:20 Am.</td>
-			<td style="width: 14%">&nbsp;BA 2487</td>
-			<td width="24%">&nbsp;Chicago</td>
+			<td style="width: 14%" align="center">Britsh Airline</td>
+			<td style="width: 14%" align="center">BA 2487</td>
+			<td width="24%" align="center">&nbsp;Chicago</td>
 			<td width="13%" align="right">6:20 A.M.&nbsp;&nbsp;&nbsp;&nbsp;
 			</td>
 			<td width="13%" align="right">6:24 A.M.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -341,9 +359,9 @@ function startTime()
 			<td width="15%" class="auto-style5">&nbsp;Departed</td>
 		</tr>
 		<tr>
-			<td style="width: 14%">Delta</td>
-			<td style="width: 14%">&nbsp;DL 4577</td>
-			<td width="24%">&nbsp;Minneapolis</td>
+			<td style="width: 14%" align="center">Delta</td>
+			<td style="width: 14%" align="center">DL 4577</td>
+			<td width="24%" align="center">&nbsp;Minneapolis</td>
 			<td width="13%" align="right">7:00 A.M.&nbsp;&nbsp;&nbsp;&nbsp;
 			</td>
 			<td width="13%" align="right">&nbsp;7:00&nbsp;A.M.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -352,9 +370,9 @@ function startTime()
 			<td width="15%" class="auto-style5">&nbsp;Departed</td>
 		</tr>
 		<tr>
-			<td style="width: 14%">American Airlines</td>
-			<td style="width: 14%">&nbsp;AA 3345</td>
-			<td width="24%">&nbsp;Chicago</td>
+			<td style="width: 14%" align="center">American Airlines</td>
+			<td style="width: 14%" align="center">AA 3345</td>
+			<td width="24%" align="center">&nbsp;Chicago</td>
 			<td width="13%" align="right">10:53 A.M.&nbsp;&nbsp;&nbsp;&nbsp;
 			</td>
 			<td width="13%" align="right">11:03 A.M.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -363,9 +381,9 @@ function startTime()
 			<td width="15%" class="auto-style3">&nbsp;Delayed</td>
 		</tr>
 		<tr>
-			<td style="width: 14%">Iberia</td>
-			<td style="width: 14%">&nbsp;IB 4489</td>
-			<td width="24%">&nbsp;Chicago&nbsp;</td>
+			<td style="width: 14%" align="center">Iberia</td>
+			<td style="width: 14%" align="center">IB 4489</td>
+			<td width="24%" align="center">&nbsp;Chicago&nbsp;</td>
 			<td width="13%" align="right">10:53 A.M.&nbsp;&nbsp;&nbsp;&nbsp;
 			</td>
 			<td width="13%" align="right">11:03 P.M.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -374,9 +392,9 @@ function startTime()
 			<td width="15%" class="auto-style4">&nbsp;<strong>Delayed</strong></td>
 		</tr>
 		<tr>
-			<td style="width: 14%">Delta</td>
-			<td style="width: 14%">&nbsp;DL 4648</td>
-			<td width="24%">&nbsp;Minneapolis</td>
+			<td style="width: 14%" align="center">Delta</td>
+			<td style="width: 14%" align="center">DL 4648</td>
+			<td width="24%" align="center">&nbsp;Minneapolis</td>
 			<td width="13%" align="right">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 12:45 
 			P.M.&nbsp;&nbsp;&nbsp;&nbsp;
 			</td>
@@ -386,9 +404,9 @@ function startTime()
 			<td width="15%" bgcolor="#008000"><b>&nbsp;On-Time</b></td>
 		</tr>
 		<tr>
-			<td style="width: 14%">KLM</td>
-			<td style="width: 14%">&nbsp;KL 6703&nbsp;</td>
-			<td width="24%">&nbsp;Minneapolis&nbsp;</td>
+			<td style="width: 14%" align="center">KLM</td>
+			<td style="width: 14%" align="center">KL 6703&nbsp;</td>
+			<td width="24%" align="center">&nbsp;Minneapolis&nbsp;</td>
 			<td width="13%" align="right">12:45 P.M.&nbsp;&nbsp;&nbsp;&nbsp;
 			</td>
 			<td width="13%" align="right">&nbsp;12:45 P.M.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -397,9 +415,9 @@ function startTime()
 			<td width="15%" bgcolor="#008000">&nbsp;<strong>On-Time&nbsp;</strong></td>
 		</tr>
 		<tr>
-			<td style="width: 14%">Air France</td>
-			<td style="width: 14%">&nbsp;AF 2197</td>
-			<td width="24%">&nbsp;Minneapolis&nbsp;</td>
+			<td style="width: 14%" align="center">Air France</td>
+			<td style="width: 14%" align="center">AF 2197</td>
+			<td width="24%" align="center">&nbsp;Minneapolis&nbsp;</td>
 			<td width="13%" align="right">12:45 P.M.&nbsp;&nbsp;&nbsp;&nbsp;
 			</td>
 			<td width="13%" align="right">&nbsp;12:45 P.M.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -408,9 +426,9 @@ function startTime()
 			<td width="15%" bgcolor="#008000">&nbsp;<strong>On-Time&nbsp;</strong></td>
 		</tr>
 		<tr>
-			<td style="width: 14%">American Airlines</td>
-			<td style="width: 14%">&nbsp;AA 3497 </td>
-			<td width="24%">&nbsp;Chicago</td>
+			<td style="width: 14%" align="center">American Airlines</td>
+			<td style="width: 14%" align="center">AA 3497 </td>
+			<td width="24%" align="center">&nbsp;Chicago</td>
 			<td width="13%" align="right">2:35 P.M.&nbsp;&nbsp;&nbsp;&nbsp;
 			</td>
 			<td width="13%" align="right">&nbsp;2:35 P.M.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -419,9 +437,9 @@ function startTime()
 			<td width="15%" bgcolor="#008000"><b>&nbsp;On-Time</b></td>
 		</tr>
 		<tr>
-			<td style="width: 14%">Qatar Airways</td>
-			<td style="width: 14%">&nbsp;QT 5611 </td>
-			<td width="24%">&nbsp;Chicago</td>
+			<td style="width: 14%" align="center">Qatar Airways</td>
+			<td style="width: 14%" align="center">QT 5611 </td>
+			<td width="24%" align="center">&nbsp;Chicago</td>
 			<td width="13%" align="right">2:35 P.M.&nbsp;&nbsp;&nbsp;&nbsp;
 			</td>
 			<td width="13%" align="right">&nbsp;2:35 P.M.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -430,9 +448,9 @@ function startTime()
 			<td width="15%" bgcolor="#008000"><b>&nbsp;On-Time</b></td>
 		</tr>
 		<tr>
-			<td style="width: 14%">British Airways</td>
-			<td style="width: 14%">&nbsp;BA 1779 </td>
-			<td width="24%">&nbsp;Chicago</td>
+			<td style="width: 14%" align="center">British Airways</td>
+			<td style="width: 14%" align="center">BA 1779 </td>
+			<td width="24%" align="center">&nbsp;Chicago</td>
 			<td width="13%" align="right">2:35 P.M.&nbsp;&nbsp;&nbsp;&nbsp;
 			</td>
 			<td width="13%" align="right">&nbsp;2:35 P.M.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -441,9 +459,9 @@ function startTime()
 			<td width="15%" bgcolor="#008000"><b>&nbsp;On-Time</b></td>
 		</tr>
 		<tr>
-			<td style="width: 14%">Iberia</td>
-			<td style="width: 14%">&nbsp;IB 4535</td>
-			<td width="24%">&nbsp;Chicago</td>
+			<td style="width: 14%" align="center">Iberia</td>
+			<td style="width: 14%" align="center">IB 4535</td>
+			<td width="24%" align="center">&nbsp;Chicago</td>
 			<td width="13%" align="right">2:35 P.M.&nbsp;&nbsp;&nbsp;&nbsp;
 			</td>
 			<td width="13%" align="right">&nbsp;2:35 P.M.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -452,9 +470,9 @@ function startTime()
 			<td width="15%" bgcolor="#008000"><b>&nbsp;On-Time</b></td>
 		</tr>
 		<tr>
-			<td style="width: 14%">Delta</td>
-			<td style="width: 14%">&nbsp;DL 4549</td>
-			<td width="24%">Minneapolis</td>
+			<td style="width: 14%" align="center">Delta</td>
+			<td style="width: 14%" align="center">DL 4549</td>
+			<td width="24%" align="center">Minneapolis</td>
 			<td width="13%" align="right">5:40 P.M.&nbsp;&nbsp;&nbsp;&nbsp;
 			</td>
 			<td width="13%" align="right">&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -463,12 +481,12 @@ function startTime()
 			<td width="15%" class="auto-style7">Cancelled</td>
 		</tr>
 		<tr>
-			<td style="width: 14%">KLM</td>
-			<td style="width: 14%">&nbsp;KL 6705</td>
-			<td width="24%">Minneapolis</td>
+			<td style="width: 14%" align="center">KLM</td>
+			<td style="width: 14%" align="center">KL 6705</td>
+			<td width="24%" align="center">Minneapolis</td>
 			<td width="13%" align="right">5:40 P.M.&nbsp;&nbsp;&nbsp;&nbsp;
 			</td>
-			<td width="13%" align="right">&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+			<td width="13%" align="right">&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			</td>
 			<td width="13%" align="center">A2</td>
 			<td width="15%" class="auto-style7">Cancelled</td>
