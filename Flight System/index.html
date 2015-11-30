@@ -44,12 +44,253 @@ function startTimeTitle() {
     s = checkTime(s);
     document.getElementById('txt').innerHTML ="Local Time: "+
     h + ":" + m + ":" + s;
+    
+    var i;
+    for(i = 1; i < 13; i++){
+        var status = document.getElementById("a"+i+"Status").innerHTML;
+        if(status == "On-Time" || status == "Delayed"){
+            var time = document.getElementById("a"+i).innerHTML;
+            time = time +":00";
+            if(time <= ( h + ":" + m + ":" + s) ){
+                var random = Math.floor(Math.random() * 100);
+                if(random < 5){
+                    
+                    if(i == 4 || i == 5){
+                        document.getElementById("a"+4+"Status").innerHTML = "Cancelled";
+                        document.getElementById("a"+4+"Status").style.backgroundColor = "#00FFFF";
+                        document.getElementById("a"+5+"Status").innerHTML = "Cancelled";
+                        document.getElementById("a"+5+"Status").style.backgroundColor = "#00FFFF";
+                    }else if( i == 6 || i == 7 || i == 8 ){
+                        document.getElementById("a"+6+"Status").innerHTML = "Cancelled";
+                        document.getElementById("a"+6+"Status").style.backgroundColor = "#00FFFF";
+                        document.getElementById("a"+7+"Status").innerHTML = "Cancelled";
+                        document.getElementById("a"+7+"Status").style.backgroundColor = "#00FFFF";
+                        document.getElementById("a"+8+"Status").innerHTML = "Cancelled";
+                        document.getElementById("a"+8+"Status").style.backgroundColor = "#00FFFF";
+                    }else if( i == 9 || i == 10 || i == 11 || i == 12 ){
+                        document.getElementById("a"+9+"Status").innerHTML = "Cancelled";
+                        document.getElementById("a"+9+"Status").style.backgroundColor = "#00FFFF";
+                        document.getElementById("a"+10+"Status").innerHTML = "Cancelled";
+                        document.getElementById("a"+10+"Status").style.backgroundColor = "#00FFFF";
+                        document.getElementById("a"+11+"Status").innerHTML = "Cancelled";
+                        document.getElementById("a"+11+"Status").style.backgroundColor = "#00FFFF";
+                        document.getElementById("a"+12+"Status").innerHTML = "Cancelled";
+                        document.getElementById("a"+12+"Status").style.backgroundColor = "#00FFFF";
+                    }else{
+                        document.getElementById("a"+i+"Status").innerHTML = "Cancelled";
+                        document.getElementById("a"+i+"Status").style.backgroundColor = "#00FFFF";
+                    }
+                    
+                    
+                }else if(random < 15){
+                    
+                    if(i == 4 || i == 5){
+                        document.getElementById("a"+4+"Status").innerHTML = "Delayed";
+                        document.getElementById("a"+4+"Status").style.backgroundColor = "#FF3366"
+                        document.getElementById("a"+5+"Status").innerHTML = "Delayed";
+                        document.getElementById("a"+5+"Status").style.backgroundColor = "#FF3366"
+                        document.getElementById("a"+4).innerHTML = ((h+1)%24) + ":" + m;
+                        document.getElementById("a"+5).innerHTML = ((h+1)%24) + ":" + m;
+                    }else if( i == 6 || i == 7 || i == 8 ){
+                        document.getElementById("a"+6+"Status").innerHTML = "Delayed";
+                        document.getElementById("a"+6+"Status").style.backgroundColor = "#FF3366"
+                        document.getElementById("a"+7+"Status").innerHTML = "Delayed";
+                        document.getElementById("a"+7+"Status").style.backgroundColor = "#FF3366"
+                        document.getElementById("a"+8+"Status").innerHTML = "Delayed";
+                        document.getElementById("a"+8+"Status").style.backgroundColor = "#FF3366"
+                        document.getElementById("a"+6).innerHTML = ((h+1)%24) + ":" + m;
+                        document.getElementById("a"+7).innerHTML = ((h+1)%24) + ":" + m;
+                        document.getElementById("a"+8).innerHTML = ((h+1)%24) + ":" + m;
+                    }else if( i == 9 || i == 10 || i == 11 || i == 12 ){
+                        document.getElementById("a"+9+"Status").innerHTML = "Delayed";
+                        document.getElementById("a"+9+"Status").style.backgroundColor = "#FF3366"
+                        document.getElementById("a"+10+"Status").innerHTML = "Delayed";
+                        document.getElementById("a"+10+"Status").style.backgroundColor = "#FF3366"
+                        document.getElementById("a"+11+"Status").innerHTML = "Delayed";
+                        document.getElementById("a"+11+"Status").style.backgroundColor = "#FF3366"
+                        document.getElementById("a"+12+"Status").innerHTML = "Delayed";
+                        document.getElementById("a"+12+"Status").style.backgroundColor = "#FF3366"
+                        document.getElementById("a"+9).innerHTML = ((h+1)%24) + ":" + m;
+                        document.getElementById("a"+10).innerHTML = ((h+1)%24) + ":" + m;
+                        document.getElementById("a"+11).innerHTML = ((h+1)%24) + ":" + m;
+                        document.getElementById("a"+12).innerHTML = ((h+1)%24) + ":" + m;
+                        
+                    }else{    
+                        document.getElementById("a"+i+"Status").innerHTML = "Delayed";
+                        document.getElementById("a"+i).innerHTML = ((h+1)%24) + ":" + m;
+                        document.getElementById("a"+i+"Status").style.backgroundColor = "#FF3366";
+                    }
+                    
+                    
+                }else{  
+                    
+                    if(i == 4 || i == 5){
+                        document.getElementById("a"+4+"Status").innerHTML = "Landed";
+                        document.getElementById("a"+4+"Status").style.backgroundColor =  "#FFFF00";
+                        document.getElementById("a"+5+"Status").innerHTML = "Landed";
+                        document.getElementById("a"+5+"Status").style.backgroundColor =  "#FFFF00";
+                    }else if( i == 6 || i == 7 || i == 8 ){
+                        document.getElementById("a"+6+"Status").innerHTML = "Landed";
+                        document.getElementById("a"+6+"Status").style.backgroundColor = "#FFFF00";
+                        document.getElementById("a"+7+"Status").innerHTML = "Landed";
+                        document.getElementById("a"+7+"Status").style.backgroundColor =  "#FFFF00";
+                        document.getElementById("a"+8+"Status").innerHTML = "Landed";
+                        document.getElementById("a"+8+"Status").style.backgroundColor =  "#FFFF00";
+                    }else if( i == 9 || i == 10 || i == 11 || i == 12 ){
+                        document.getElementById("a"+9+"Status").innerHTML = "Landed";
+                        document.getElementById("a"+9+"Status").style.backgroundColor =  "#FFFF00";
+                        document.getElementById("a"+10+"Status").innerHTML = "Landed";
+                        document.getElementById("a"+10+"Status").style.backgroundColor = "#FFFF00";
+                        document.getElementById("a"+11+"Status").innerHTML = "Landed";
+                        document.getElementById("a"+11+"Status").style.backgroundColor =  "#FFFF00";
+                        document.getElementById("a"+12+"Status").innerHTML = "Landed";
+                        document.getElementById("a"+12+"Status").style.backgroundColor =  "#FFFF00";
+                    }else{
+                        document.getElementById("a"+i+"Status").innerHTML = "Landed";
+                        document.getElementById("a"+i+"Status").style.backgroundColor =  "#FFFF00";
+                    }
+                    
+                }
+                
+                if(i == 4){
+                    i = 5;
+                }else if(i == 6){
+                    i = 8;
+                }else if(i == 9){
+                    i = 12;
+                }
+            }
+        }
+    }
+    
+    
+        for(i = 1; i < 13; i++){
+        var status = document.getElementById("d"+i+"Status").innerHTML;
+        if(status == "On-Time" || status == "Delayed"){
+            var time = document.getElementById("d"+i).innerHTML;
+            time = time +":00";
+            if(time <= ( h + ":" + m + ":" + s) ){
+                var random = Math.floor(Math.random() * 100);
+                if(random < 5){
+                    
+                    if(i == 5 || i == 6){
+                        document.getElementById("d"+5+"Status").innerHTML = "Cancelled";
+                        document.getElementById("d"+5+"Status").style.backgroundColor = "#00FFFF";
+                        document.getElementById("d"+6+"Status").innerHTML = "Cancelled";
+                        document.getElementById("d"+6+"Status").style.backgroundColor = "#00FFFF";
+                    }else if( i == 7 || i == 8 || i == 9 ){
+                        document.getElementById("d"+9+"Status").innerHTML = "Cancelled";
+                        document.getElementById("d"+9+"Status").style.backgroundColor = "#00FFFF";
+                        document.getElementById("d"+7+"Status").innerHTML = "Cancelled";
+                        document.getElementById("d"+7+"Status").style.backgroundColor = "#00FFFF";
+                        document.getElementById("d"+8+"Status").innerHTML = "Cancelled";
+                        document.getElementById("d"+8+"Status").style.backgroundColor = "#00FFFF";
+                    }else if( i == 10 || i == 11 || i == 12 || i == 13 ){
+                        document.getElementById("d"+13+"Status").innerHTML = "Cancelled";
+                        document.getElementById("d"+13+"Status").style.backgroundColor = "#00FFFF";
+                        document.getElementById("d"+10+"Status").innerHTML = "Cancelled";
+                        document.getElementById("d"+10+"Status").style.backgroundColor = "#00FFFF";
+                        document.getElementById("d"+11+"Status").innerHTML = "Cancelled";
+                        document.getElementById("d"+11+"Status").style.backgroundColor = "#00FFFF";
+                        document.getElementById("d"+12+"Status").innerHTML = "Cancelled";
+                        document.getElementById("d"+12+"Status").style.backgroundColor = "#00FFFF";
+                    }else{
+                        document.getElementById("d"+i+"Status").innerHTML = "Cancelled";
+                        document.getElementById("d"+i+"Status").style.backgroundColor = "#00FFFF";
+                    }
+                    
+                    
+                }else if(random < 15){
+                    
+                    if(i == 5 || i == 6){
+                        document.getElementById("d"+6+"Status").innerHTML = "Delayed";
+                        document.getElementById("d"+6+"Status").style.backgroundColor = "#FF3366"
+                        document.getElementById("d"+5+"Status").innerHTML = "Delayed";
+                        document.getElementById("d"+5+"Status").style.backgroundColor = "#FF3366"
+                        document.getElementById("d"+6).innerHTML = ((h+1)%24) + ":" + m;
+                        document.getElementById("d"+5).innerHTML = ((h+1)%24) + ":" + m;
+                    }else if( i == 9 || i == 7 || i == 8 ){
+                        document.getElementById("d"+9+"Status").innerHTML = "Delayed";
+                        document.getElementById("d"+9+"Status").style.backgroundColor = "#FF3366"
+                        document.getElementById("d"+7+"Status").innerHTML = "Delayed";
+                        document.getElementById("d"+7+"Status").style.backgroundColor = "#FF3366"
+                        document.getElementById("d"+8+"Status").innerHTML = "Delayed";
+                        document.getElementById("d"+8+"Status").style.backgroundColor = "#FF3366"
+                        document.getElementById("d"+9).innerHTML = ((h+1)%24) + ":" + m;
+                        document.getElementById("d"+7).innerHTML = ((h+1)%24) + ":" + m;
+                        document.getElementById("d"+8).innerHTML = ((h+1)%24) + ":" + m;
+                    }else if( i == 13 || i == 10 || i == 11 || i == 12 ){
+                        document.getElementById("d"+13+"Status").innerHTML = "Delayed";
+                        document.getElementById("d"+13+"Status").style.backgroundColor = "#FF3366"
+                        document.getElementById("d"+10+"Status").innerHTML = "Delayed";
+                        document.getElementById("d"+10+"Status").style.backgroundColor = "#FF3366"
+                        document.getElementById("d"+11+"Status").innerHTML = "Delayed";
+                        document.getElementById("d"+11+"Status").style.backgroundColor = "#FF3366"
+                        document.getElementById("d"+12+"Status").innerHTML = "Delayed";
+                        document.getElementById("d"+12+"Status").style.backgroundColor = "#FF3366"
+                        document.getElementById("d"+13).innerHTML = ((h+1)%24) + ":" + m;
+                        document.getElementById("d"+10).innerHTML = ((h+1)%24) + ":" + m;
+                        document.getElementById("d"+11).innerHTML = ((h+1)%24) + ":" + m;
+                        document.getElementById("d"+12).innerHTML = ((h+1)%24) + ":" + m;
+                        
+                    }else{    
+                        document.getElementById("d"+i+"Status").innerHTML = "Delayed";
+                        document.getElementById("d"+i).innerHTML = ((h+1)%24) + ":" + m;
+                        document.getElementById("d"+i+"Status").style.backgroundColor = "#FF3366";
+                    }
+                    
+                    
+                }else{  
+                    
+                    if(i == 6 || i == 5){
+                        document.getElementById("d"+6+"Status").innerHTML = "Departed";
+                        document.getElementById("d"+6+"Status").style.backgroundColor =  "#FFFF00";
+                        document.getElementById("d"+5+"Status").innerHTML = "Departed";
+                        document.getElementById("d"+5+"Status").style.backgroundColor =  "#FFFF00";
+                    }else if( i == 9 || i == 7 || i == 8 ){
+                        document.getElementById("d"+9+"Status").innerHTML = "Departed";
+                        document.getElementById("d"+9+"Status").style.backgroundColor = "#FFFF00";
+                        document.getElementById("d"+7+"Status").innerHTML = "Departed";
+                        document.getElementById("d"+7+"Status").style.backgroundColor =  "#FFFF00";
+                        document.getElementById("d"+8+"Status").innerHTML = "Departed";
+                        document.getElementById("d"+8+"Status").style.backgroundColor =  "#FFFF00";
+                    }else if( i == 13 || i == 10 || i == 11 || i == 12 ){
+                        document.getElementById("d"+13+"Status").innerHTML = "Departed";
+                        document.getElementById("d"+13+"Status").style.backgroundColor =  "#FFFF00";
+                        document.getElementById("d"+10+"Status").innerHTML = "Departed";
+                        document.getElementById("d"+10+"Status").style.backgroundColor = "#FFFF00";
+                        document.getElementById("d"+11+"Status").innerHTML = "Departed";
+                        document.getElementById("d"+11+"Status").style.backgroundColor =  "#FFFF00";
+                        document.getElementById("d"+12+"Status").innerHTML = "Departed";
+                        document.getElementById("d"+12+"Status").style.backgroundColor =  "#FFFF00";
+                    }else{
+                        document.getElementById("d"+i+"Status").innerHTML = "Departed";
+                        document.getElementById("d"+i+"Status").style.backgroundColor =  "#FFFF00";
+                    }
+                    
+                }
+                
+                if(i == 5){
+                    i = 6;
+                }else if(i == 7){
+                    i = 9;
+                }else if(i == 10){
+                    i = 13;
+                }
+            }
+        }
+    }
+    
+    
     var t = setTimeout(startTimeTitle, 500);
+    
 }
 function checkTime(i) {
     if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
     return i;
-}
+}  
+
+
     
 </script>
     
@@ -65,45 +306,57 @@ function checkTime(i) {
 
 <script type="text/javascript" src="js/jquery.js"></script>
 
-<script type="text/javascript">
-  jQuery(window).scroll(function (event) {
+<script>
+    
+     jQuery(window).scroll(function (event) {
 	  	
-		var top = jQuery('#popular-upcoming').offset().top - jQuery(document).scrollTop();;
+		var top = jQuery('#popular-upcoming').offset().top;
 		// what the y position of the scroll is
 		var y = jQuery(this).scrollTop();
 		// whether that's below the form
-		if (y >= top)  {
-		// if so, add the active class to popular-upcoming and remove from content
-		jQuery('.page-nav-popular-posts').addClass('active');
-		jQuery('.page-nav-top-posts').removeClass('active');
-		} else {
-		// otherwise remove it
-		jQuery('.page-nav-popular-posts').removeClass('active');
-		jQuery('.page-nav-top-posts').addClass('active');
-	   }
+		if (y >= top+450)  {
+		  document.getElementById("popular-scroll").style.backgroundColor = "#ADDFFF";
+        document.getElementById("feature-scroll").style.backgroundColor = "white";
+	   }else if(y >= top){
+           document.getElementById("popular-scroll").style.backgroundColor = "white";
+        document.getElementById("feature-scroll").style.backgroundColor = "#ADDFFF";
+       }
+         else{
+           document.getElementById("popular-scroll").style.backgroundColor = "white";
+        document.getElementById("feature-scroll").style.backgroundColor = "white";
+       }
   });
-  
-  jQuery(document).ready(function (){
-  jQuery('#popular-scroll').click(function (){
-            //jQuery(this).animate(function(){
-                jQuery('html, body').animate({
-                    scrollTop: jQuery('#popular-upcoming').offset().top
-                     }, 2000);
-            //});
-        });
-		
-		jQuery('#feature-scroll').click(function (){
-            //jQuery(this).animate(function(){
-                jQuery('html, body').animate({
-                    scrollTop: jQuery('#inner').offset().top
-                     }, 2000);
-            //});
-        });
-		  });
-	  </script>
+    
+        // When the Document Object Model is ready
+jQuery(document).ready(function(){
+	// 'catTopPosition' is the amount of pixels #cat
+	// is from the top of the document
+    
+	var departPosition = jQuery('#depart').offset().top;
+	var arrivePosition = jQuery('#arrive').offset().top;
+	// When #scroll is clicked
+	jQuery('#popular-scroll').click(function(){
+		// Scroll down to 'catTopPosition'
+		jQuery('html, body').animate({scrollTop:departPosition}, 'slow');
+		// Stop the link from acting like a normal anchor link
+        
+		return false;
+	});
+    
+    jQuery('#feature-scroll').click(function(){
+		// Scroll down to 'catTopPosition'
+		jQuery('html, body').animate({scrollTop:arrivePosition}, 'slow');
+		// Stop the link from acting like a normal anchor link
+		return false;
+	});
+});
+    
+   
+
+</script>
 </head>
 
-<body class="home blog header-full-width full-width-content" onload="startTime(); startTimeTitle();">
+<body onscroll="myFunction()" class="home blog header-full-width full-width-content" onload="startTime(); startTimeTitle();">
   <div id="header">
   <div class="site-header">
     <h1 class="site-header-logo-container">
@@ -112,9 +365,9 @@ function checkTime(i) {
     </h1>
       
             <ul id="page-nav" class="horizontal-list" style="font-size:17px;">
-<li class="page-nav-top-posts active" ><a href="javascript:void(0)"  id="feature-scroll" class="page-anchor-link"><font face="Arial">Flight Arrival</font></a></li>
+<li class="page-nav-popular-posts" ><a id="feature-scroll" class="page-anchor-link"><font style="color:black" face="Arial">Flight Arrival</font></a></li>
 
-                <li class="page-nav-popular-posts"><a href="javascript:void(0)" id="popular-scroll" class="page-anchor-link"><font  face="Arial">Flight Departure</font></a></li>
+                <li  class="page-nav-popular-posts"><a id="popular-scroll" class="page-anchor-link"><font style="color:black"  face="Arial">Flight Departure</font></a></li>
 
 </ul>
 
@@ -162,8 +415,8 @@ function checkTime(i) {
 </div>
 
     
-<div align="center">
-	<table border="0"  bgcolor="#f1f1f1" align="center" width="200%" id="table1">
+<div id="arrive" align="center">
+	<table border="0" bgcolor="#f1f1f1" align="center" width="200%" id="table1">
 		<tbody><tr>
 			<td colspan="7" align="center"><font size="5"><b><br>Flight Arrival 
 			Schedule</b></font></td>
@@ -185,120 +438,120 @@ function checkTime(i) {
 			<td style="width: 14%" align="center">AA 3345</td>
 			<td width="24%" align="center">Chicago</td>
 			<td width="13%" align="center">09:30</td>
-			<td width="13%" align="center">09:30
+			<td id="a1" width="13%" align="center">09:30
 			</td>
 			<td width="13%" align="center">A1</td>
-			<td width="15%"  align="center" bgcolor="#FFFF00" class="auto-style6">Landed</td>
+			<td id="a1Status" width="15%"  align="center" bgcolor="#FFFF00" class="auto-style6">Landed</td>
 		</tr>
 		<tr>
 			<td style="width: 14%" align="center">British Airways</td>
 			<td style="width: 14%" align="center">BA 6764</td>
 			<td width="24%" align="center">Chicago</td>
 			<td width="13%" align="center">09:30</td>
-			<td width="13%" align="center">09:30
+			<td id="a2" width="13%" align="center">09:30
 			</td>
 			<td width="13%" align="center">A1</td>
-			<td width="15%" class="auto-style5" bgcolor="#FFFF00" align="center">Landed</td>
+			<td id="a2Status" width="15%" class="auto-style5" bgcolor="#FFFF00" align="center">Landed</td>
 		</tr>
 		<tr>
 			<td style="width: 14%" align="center">Delta</td>
 			<td style="width: 14%" align="center">DL 4648</td>
 			<td width="24%" align="center">Minneapolis</td>
 			<td width="13%" align="center">11:50</td>
-			<td width="13%" align="center">12:50
+			<td id="a3" width="13%" align="center">12:50
 			</td>
 			<td width="13%" align="center">A2</td>
-			<td width="15%" class="auto-style3" bgcolor="#FF3366" align="center">Delayed</td>
+			<td id="a3Status" width="15%" class="auto-style3" bgcolor="#FF3366" align="center">Delayed</td>
 		</tr>
 		<tr>
 			<td style="width: 14%" align="center">American Airlines</td>
 			<td style="width: 14%" align="center">AA 3497</td>
 			<td width="24%" align="center">&nbsp;Chicago</td>
 			<td width="13%" align="center">13:31</td>
-			<td width="13%" align="center">13:31
+			<td id="a4" width="13%" align="center">13:31
 			</td>
 			<td width="13%" align="center">A1</td>
-			<td width="15%" bgcolor="#66FF00" align="center">On-Time</td>
+			<td id="a4Status" width="15%" bgcolor="#66FF00" align="center">On-Time</td>
 		</tr>
 		<tr>
 			<td style="width: 14%" align="center">Etihad Airways</td>
 			<td style="width: 14%" align="center">ET 3294</td>
 			<td width="24%" align="center">Chicago</td>
 			<td width="13%" align="center">13:31</td>
-			<td width="13%" align="center">13:31
+			<td id="a5" width="13%" align="center">13:31
 			</td>
 			<td width="13%" align="center">A1</td>
-			<td width="15%" bgcolor="#66FF00" align="center">On-Time</td>
+			<td id="a5Status" width="15%" bgcolor="#66FF00" align="center">On-Time</td>
 		</tr>
 		<tr>
 			<td style="width: 14%" align="center">Delta</td>
 			<td style="width: 14%" align="center">DL 4549</td>
 			<td width="24%" align="center">Minneapolis</td>
 			<td width="13%" align="center">16:55</td>
-			<td width="13%" align="center">17:50
+			<td id="a6" width="13%" align="center">17:50
 			</td>
 			<td width="13%" align="center">A2</td>
-			<td width="15%" class="auto-style3" bgcolor="#FF3366" align="center">Delayed</td>
+			<td id="a6Status" width="15%" class="auto-style3" bgcolor="#FF3366" align="center">Delayed</td>
 		</tr>
 		<tr>
 			<td style="width: 14%" align="center">KLM</td>
 			<td style="width: 14%" align="center">KL 6705</td>
 			<td width="24%" align="center">&nbsp;Minneapolis</td>
 			<td width="13%" align="center">16:55</td>
-			<td width="13%" align="center">17:50
+			<td id="a7" width="13%" align="center">17:50
 			</td>
 			<td width="13%" align="center">A2</td>
-			<td width="15%" class="auto-style4" bgcolor="#FF3366" align="center">Delayed</td>
+			<td id="a7Status" width="15%" class="auto-style4" bgcolor="#FF3366" align="center">Delayed</td>
 		</tr>
 		<tr>
 			<td style="width: 14%" align="center">Air France</td>
 			<td style="width: 14%" align="center">AF 2180</td>
 			<td width="24%" align="center">Minneapolis</td>
 			<td width="13%" align="center">16:55</td>
-			<td width="13%" align="center">17:50
+			<td id="a8" width="13%" align="center">17:50
 			</td>
 			<td width="13%" align="center">A2</td>
-			<td width="15%" class="auto-style4" bgcolor="#FF3366" align="center">Delayed</td>
+			<td id="a8Status" width="15%" class="auto-style4" bgcolor="#FF3366" align="center">Delayed</td>
 		</tr>
 		<tr>
 			<td style="width: 14%" align="center">American Airlines</td>
 			<td style="width: 14%" align="center">AA 3347 </td>
 			<td width="24%" align="center">Chicago</td>
 			<td width="13%" align="center">21:41</td>
-			<td width="13%" align="center">21:41
+			<td id="a9" width="13%" align="center">21:41
 			</td>
 			<td width="13%" align="center">A1</td>
-			<td width="15%" bgcolor="#66FF00" align="center">On-Time</td>
+			<td id="a9Status" width="15%" bgcolor="#66FF00" align="center">On-Time</td>
 		</tr>
 		<tr>
 			<td style="width: 14%" align="center">Qatar Airways</td>
 			<td style="width: 14%" align="center">QT 5270</td>
 			<td width="24%" align="center">Chicago</td>
 			<td width="13%" align="center">21:41</td>
-			<td width="13%" align="center">21:41
+			<td id="a10" width="13%" align="center">21:41
 			</td>
 			<td width="13%" align="center">A1</td>
-			<td width="15%" bgcolor="#66FF00" align="center">On-Time</td>
+			<td id="a10Status" width="15%" bgcolor="#66FF00" align="center">On-Time</td>
 		</tr>
 		<tr>
 			<td style="width: 14%" align="center">British Airways</td>
 			<td style="width: 14%" align="center">BA 6842 </td>
 			<td width="24%" align="center">Chicago</td>
 			<td width="13%" align="center">21:41</td>
-			<td width="13%" align="center">21:41
+			<td id="a11" width="13%" align="center">21:41
 			</td>
 			<td width="13%" align="center">A1</td>
-			<td width="15%" bgcolor="#66FF00" align="center">On-Time</td>
+			<td id="a11Status" width="15%" bgcolor="#66FF00" align="center">On-Time</td>
 		</tr>
 		<tr>
 			<td style="width: 14%" align="center">Iberia</td>
 			<td style="width: 14%" align="center">IB 4087</td>
 			<td width="24%" align="center">Chicago</td>
 			<td width="13%" align="center">21:41</td>
-			<td width="13%" align="center">21:41
+			<td id="a12" width="13%" align="center">21:41
 			</td>
 			<td width="13%" align="center">A1</td>
-			<td width="15%" bgcolor="#66FF00" align="center">On-Time</td>
+			<td id="a12Status" width="15%" bgcolor="#66FF00" align="center">On-Time</td>
 		</tr>
 	</tbody>
     </table>
@@ -306,7 +559,7 @@ function checkTime(i) {
     <br>
     <br>
     
-    <div align="center">
+    <div id="depart" align="center">
 	<table border="0"  bgcolor="#f1f1f1" align="center" width="200%" id="table2">
         <br>
 		<tbody><tr>
@@ -331,10 +584,10 @@ function checkTime(i) {
 			<td style="width: 14%" align="center">AA 3366</td>
 			<td width="24%" align="center">Chicago</td>
 			<td width="13%" align="center">06:20</td>
-			<td width="13%" align="center">06:24
+			<td id="d1" width="13%" align="center">06:24
 			</td>
 			<td width="13%" align="center">A1</td>
-			<td width="15%" class="auto-style6" align="center" bgcolor="#FFFF00">Departed</td>
+			<td id="d1Status" width="15%" class="auto-style6" align="center" bgcolor="#FFFF00">Departed</td>
 		</tr>
 		<tr>
 			<td style="width: 14%" align="center">Etihad Airways</td>
@@ -342,10 +595,10 @@ function checkTime(i) {
 			<td width="24%" align="center">Chicago</td>
 			<td width="13%" align="center">06:20
 			</td>
-			<td width="13%" align="center">06:24
+			<td id="d2" width="13%" align="center">06:24
 			</td>
 			<td width="13%" align="center">A1</td>
-			<td width="15%" class="auto-style5" align="center" bgcolor="#FFFF00">Departed</td>
+			<td id="d2Status" width="15%" class="auto-style5" align="center" bgcolor="#FFFF00">Departed</td>
 		</tr>
 		<tr>
 			<td style="width: 14%" align="center">Britsh Airline</td>
@@ -353,10 +606,10 @@ function checkTime(i) {
 			<td width="24%" align="center">Chicago</td>
 			<td width="13%" align="center">06:20
 			</td>
-			<td width="13%" align="center">06:24
+			<td id="d3" width="13%" align="center">06:24
 			</td>
 			<td width="13%" align="center">A1</td>
-			<td width="15%" class="auto-style5" align="center" bgcolor="#FFFF00">Departed</td>
+			<td id="d3Status" width="15%" class="auto-style5" align="center" bgcolor="#FFFF00">Departed</td>
 		</tr>
 		<tr>
 			<td style="width: 14%" align="center">Delta</td>
@@ -364,10 +617,10 @@ function checkTime(i) {
 			<td width="24%" align="center">&nbsp;Minneapolis</td>
 			<td width="13%" align="center">07:00
 			</td>
-			<td width="13%" align="center">07:00
+			<td id="d4" width="13%" align="center">07:00
 			</td>
 			<td width="13%" align="center">A2</td>
-			<td width="15%" class="auto-style5" align="center" bgcolor="#FFFF00">Departed</td>
+			<td id="d4Status" width="15%" class="auto-style5" align="center" bgcolor="#FFFF00">Departed</td>
 		</tr>
 		<tr>
 			<td style="width: 14%" align="center">American Airlines</td>
@@ -375,10 +628,10 @@ function checkTime(i) {
 			<td width="24%" align="center">Chicago</td>
 			<td width="13%" align="center">10:53
 			</td>
-			<td width="13%" align="center">11:03
+			<td id="d5" width="13%" align="center">11:03
 			</td>
 			<td width="13%" align="center">A1</td>
-			<td width="15%" class="auto-style3" bgcolor="#FF3366" align="center">Delayed</td>
+			<td id="d5Status" width="15%" class="auto-style3" bgcolor="#FF3366" align="center">Delayed</td>
 		</tr>
 		<tr>
 			<td style="width: 14%" align="center">Iberia</td>
@@ -386,10 +639,10 @@ function checkTime(i) {
 			<td width="24%" align="center">Chicago</td>
 			<td width="13%" align="center">10:53
 			</td>
-			<td width="13%" align="center">11:03
+			<td id="d6" width="13%" align="center">11:03
 			</td>
 			<td width="13%" align="center">A1</td>
-			<td width="15%" class="auto-style4" align="center" bgcolor="#FF3366">Delayed</td>
+			<td id="d6Status" width="15%" class="auto-style4" align="center" bgcolor="#FF3366">Delayed</td>
 		</tr>
 		<tr>
 			<td style="width: 14%" align="center">Delta</td>
@@ -397,10 +650,10 @@ function checkTime(i) {
 			<td width="24%" align="center">Minneapolis</td>
 			<td width="13%" align="center">12:45
 			</td>
-			<td width="13%" align="center">12:45
+			<td id="d7" width="13%" align="center">12:45
 			</td>
 			<td width="13%" align="center">A2</td>
-			<td width="15%" bgcolor="#66FF00" align="center">On-Time</td>
+			<td id="d7Status" width="15%" bgcolor="#66FF00" align="center">On-Time</td>
 		</tr>
 		<tr>
 			<td style="width: 14%" align="center">KLM</td>
@@ -408,10 +661,10 @@ function checkTime(i) {
 			<td width="24%" align="center">Minneapolis</td>
 			<td width="13%" align="center">12:45
 			</td>
-			<td width="13%" align="center">12:45
+			<td id="d8" width="13%" align="center">12:45
 			</td>
 			<td width="13%" align="center">A2</td>
-			<td width="15%" bgcolor="#66FF00" align="center">On-Time</td>
+			<td id="d8Status" width="15%" bgcolor="#66FF00" align="center">On-Time</td>
 		</tr>
 		<tr>
 			<td style="width: 14%" align="center">Air France</td>
@@ -419,10 +672,10 @@ function checkTime(i) {
 			<td width="24%" align="center" align="center">Minneapolis</td>
 			<td width="13%" align="center">12:45
 			</td>
-			<td width="13%" align="center">12:45
+			<td id="d9" width="13%" align="center">12:45
 			</td>
 			<td width="13%" align="center">A2</td>
-			<td width="15%" bgcolor="#66FF00" align="center">On-Time</td>
+			<td id="d9Status" width="15%" bgcolor="#66FF00" align="center">On-Time</td>
 		</tr>
 		<tr>
 			<td style="width: 14%" align="center">American Airlines</td>
@@ -430,10 +683,10 @@ function checkTime(i) {
 			<td width="24%" align="center">Chicago</td>
 			<td width="13%" align="center">14:35
 			</td>
-			<td width="13%" align="center">14:35
+			<td id="d10" width="13%" align="center">14:35
 			</td>
 			<td width="13%" align="center">A1</td>
-			<td width="15%" bgcolor="#66FF00" align="center">On-Time</td>
+			<td id="d10Status" width="15%" bgcolor="#66FF00" align="center">On-Time</td>
 		</tr>
 		<tr>
 			<td style="width: 14%" align="center">Qatar Airways</td>
@@ -441,10 +694,10 @@ function checkTime(i) {
 			<td width="24%" align="center">&nbsp;Chicago</td>
 			<td width="13%" align="center">14:35
 			</td>
-			<td width="13%" align="center">14:35
+			<td id="d11" width="13%" align="center">14:35
 			</td>
 			<td width="13%" align="center">A1</td>
-			<td width="15%" bgcolor="#66FF00" align="center">On-Time</td>
+			<td id="d11Status" width="15%" bgcolor="#66FF00" align="center">On-Time</td>
 		</tr>
 		<tr>
 			<td style="width: 14%" align="center">British Airways</td>
@@ -452,10 +705,10 @@ function checkTime(i) {
 			<td width="24%" align="center">&nbsp;Chicago</td>
 			<td width="13%" align="center">14:35
 			</td>
-			<td width="13%" align="center">14:35
+			<td id="d12" width="13%" align="center">14:35
 			</td>
 			<td width="13%" align="center">A1</td>
-			<td width="15%" bgcolor="#66FF00" align="center">On-Time</td>
+			<td id="d12Status" width="15%" bgcolor="#66FF00" align="center">On-Time</td>
 		</tr>
 		<tr>
 			<td style="width: 14%" align="center">Iberia</td>
@@ -463,10 +716,10 @@ function checkTime(i) {
 			<td width="24%" align="center">Chicago</td>
 			<td width="13%" align="center">14:35
 			</td>
-			<td width="13%" align="center">14:35
+			<td id="d13" width="13%" align="center">14:35
 			</td>
 			<td width="13%" align="center">A1</td>
-			<td width="15%" bgcolor="#66FF00" align="center">On-Time</td>
+			<td id="d13Status" width="15%" bgcolor="#66FF00" align="center">On-Time</td>
 		</tr>
 		<tr>
 			<td style="width: 14%" align="center">Delta</td>
